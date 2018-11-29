@@ -1,0 +1,54 @@
+body {
+    background-color: ghostwhite;
+}
+
+div.player1, div.player2 {
+    display: inline-block;
+    margin: 50px;
+}
+
+div.hiddenPlayer2, div.hiddenPlayer1 {
+    opacity: 0.5;
+    cursor: not-allowed;
+    display: inline-block;
+    margin: 50px;
+}
+
+div.row {
+    background-color: lightgrey;
+    display: inline-block;
+}
+
+div.column, div.columnShip {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    border: solid grey 1px;
+}
+
+div.hiddenPlayer1 div.column, div.columnShip, div.hittedShip, div.mishit {
+    pointer-events: none;
+}
+
+div.hiddenPlayer2 div.column, div.columnShip, div.hittedShip, div.mishit {
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    border: solid grey 1px;
+}
+
+div.column {
+    background-color: lightgrey;
+}
+
+div.hittedShip {
+    cursor: not-allowed;
+    background-color: lightblue;
+}
+
+div.mishit {
+    cursor: not-allowed;
+    background-color: yellow;
+}
