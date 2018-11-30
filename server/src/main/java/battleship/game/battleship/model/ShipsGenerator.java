@@ -7,8 +7,8 @@ import java.util.stream.IntStream;
 
 public class ShipsGenerator {
     //ONLY TEMPORARY
-    public static List<Ship> generateShipsForPlayer1() {
-        List<Ship> ships = new ArrayList<>();
+    public static List<List<BoardPoint>> generateShipsForPlayer1() {
+        List<List<BoardPoint>> ships = new ArrayList<List<BoardPoint>>();
         List<BoardPoint> fourDecker = generateShip(0, 5, 4, false);
         List<BoardPoint> threeDeckerOne = generateShip(3, 3, 3, true);
         List<BoardPoint> threeDeckerTwo = generateShip(4, 5, 3, true);
@@ -20,22 +20,22 @@ public class ShipsGenerator {
         List<BoardPoint> singleDeckerThree = generateShip(2, 8, 1, true);
         List<BoardPoint> singleDeckerFour = generateShip(4, 8, 1, true);
 
-        ships.add(new Ship(fourDecker));
-        ships.add(new Ship(threeDeckerOne));
-        ships.add(new Ship(threeDeckerTwo));
-        ships.add(new Ship(twoDeckerOne));
-        ships.add(new Ship(twoDeckerTwo));
-        ships.add(new Ship(twoDeckerThree));
-        ships.add(new Ship(singleDeckerOne));
-        ships.add(new Ship(singleDeckerTwo));
-        ships.add(new Ship(singleDeckerThree));
-        ships.add(new Ship(singleDeckerFour));
+        ships.add(fourDecker);
+        ships.add(threeDeckerOne);
+        ships.add(threeDeckerTwo);
+        ships.add(twoDeckerOne);
+        ships.add(twoDeckerTwo);
+        ships.add(twoDeckerThree);
+        ships.add(singleDeckerOne);
+        ships.add(singleDeckerTwo);
+        ships.add(singleDeckerThree);
+        ships.add(singleDeckerFour);
 
         return ships;
     }
 
-    public static List<Ship> generateShipsForPlayer2() {
-        List<Ship> ships = new ArrayList<>();
+    public static List<List<BoardPoint>> generateShipsForPlayer2() {
+        List<List<BoardPoint>> ships = new ArrayList<List<BoardPoint>>();
         List<BoardPoint> fourDecker = generateShip(2, 6, 4, true);
         List<BoardPoint> threeDeckerOne = generateShip(7, 3, 3, false);
         List<BoardPoint> threeDeckerTwo = generateShip(7, 9, 3, true);
@@ -47,16 +47,16 @@ public class ShipsGenerator {
         List<BoardPoint> singleDeckerThree = generateShip(9, 7, 1, true);
         List<BoardPoint> singleDeckerFour = generateShip(4, 3, 1, true);
 
-        ships.add(new Ship(fourDecker));
-        ships.add(new Ship(threeDeckerOne));
-        ships.add(new Ship(threeDeckerTwo));
-        ships.add(new Ship(twoDeckerOne));
-        ships.add(new Ship(twoDeckerTwo));
-        ships.add(new Ship(twoDeckerThree));
-        ships.add(new Ship(singleDeckerOne));
-        ships.add(new Ship(singleDeckerTwo));
-        ships.add(new Ship(singleDeckerThree));
-        ships.add(new Ship(singleDeckerFour));
+        ships.add(fourDecker);
+        ships.add(threeDeckerOne);
+        ships.add(threeDeckerTwo);
+        ships.add(twoDeckerOne);
+        ships.add(twoDeckerTwo);
+        ships.add(twoDeckerThree);
+        ships.add(singleDeckerOne);
+        ships.add(singleDeckerTwo);
+        ships.add(singleDeckerThree);
+        ships.add(singleDeckerFour);
 
         return ships;
     }
@@ -70,4 +70,5 @@ public class ShipsGenerator {
             }
         }).collect(Collectors.toList());
     }
+
 }

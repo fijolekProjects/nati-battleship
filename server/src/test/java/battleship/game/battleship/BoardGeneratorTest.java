@@ -14,15 +14,8 @@ public class BoardGeneratorTest {
 
         Assert.assertEquals(boardGenerator.getBoard().size(), 10);
         Assert.assertEquals(boardGenerator.getBoard().get(0).size(), 10);
-    }
 
-    @Test
-    public void isItAShipPoint() {
-        BoardPoint boardPoint = new BoardPoint(0,5);
-        List<Ship> ships = ShipsGenerator.generateShipsForPlayer1();
-        boolean isItAShipPoint = ships.stream().anyMatch(ship -> ship.getShipPoints().contains(boardPoint));
-
-        Assert.assertTrue(isItAShipPoint);
+        System.out.println(boardGenerator.getBoard());
     }
 
 }

@@ -1,30 +1,42 @@
 body {
-    background-color: ghostwhite;
+    background-image: url("assets/boat-folding.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+div.myApp {
+    border: solid whitesmoke;
+    background-color: rgba(255, 255, 255, 0.53);
 }
 
 div.player1, div.player2 {
-    display: inline-block;
+    /*display: inline-block;*/
     margin: 50px;
 }
 
 div.hiddenPlayer2, div.hiddenPlayer1 {
     opacity: 0.5;
     cursor: not-allowed;
-    display: inline-block;
+    /*display: inline-block;*/
     margin: 50px;
 }
 
 div.row {
-    background-color: lightgrey;
-    display: inline-block;
+    margin-bottom: -6px;
 }
 
-div.column, div.columnShip {
+div.column, div.columnShip, div.hittedShip, div.mishit {
     cursor: pointer;
     width: 20px;
     height: 20px;
     padding: 10px;
-    border: solid grey 1px;
+    border: solid grey 0.5px;
+    display: inline-block;
 }
 
 div.hiddenPlayer1 div.column, div.columnShip, div.hittedShip, div.mishit {
@@ -33,22 +45,71 @@ div.hiddenPlayer1 div.column, div.columnShip, div.hittedShip, div.mishit {
 
 div.hiddenPlayer2 div.column, div.columnShip, div.hittedShip, div.mishit {
     pointer-events: none;
-    width: 20px;
-    height: 20px;
-    padding: 10px;
-    border: solid grey 1px;
 }
 
 div.column {
-    background-color: lightgrey;
+    /*background-color: rgba(231, 237, 240, 0.83);*/
 }
 
 div.hittedShip {
     cursor: not-allowed;
-    background-color: lightblue;
+    background-color: #F6521C;
 }
 
 div.mishit {
     cursor: not-allowed;
-    background-color: yellow;
+    background-color: lightgrey;
+
+}
+
+div.hittedShips {
+    margin: 30px;
+}
+
+div.board {
+    margin: 20px;
+    display: inline-block;
+}
+
+div.decker1, div.decker2, div.decker3, div.decker4,div.hiddenDecker1, div.hiddenDecker2, div.hiddenDecker3, div.hiddenDecker4 {
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    background-color: #F6521C;
+    margin: 5px;
+    color: whitesmoke;
+}
+
+div.hiddenDecker1 {
+    opacity: 0.6;
+}
+
+div.decker2, div.hiddenDecker2 {
+    width: 40px;
+    height: 20px;
+}
+
+div.hiddenDecker2 {
+    opacity: 0.6;
+}
+div.decker3, div.hiddenDecker3 {
+    width: 60px;
+    height: 20px;
+}
+
+div.hiddenDecker3 {
+    opacity: 0.6;
+}
+
+div.decker4, div.hiddenDecker4 {
+    width: 80px;
+    height: 20px;
+}
+
+div.hiddenDecker4 {
+    opacity: 0.6;
+}
+
+div.drawShips {
+    text-align: left;
 }

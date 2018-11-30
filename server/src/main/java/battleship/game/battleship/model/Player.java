@@ -5,18 +5,20 @@ import java.util.List;
 public class Player {
     private int playerId;
     private Board board;
-    private List<Ship> ships;
+    private List<List<BoardPoint>> ships;
     private boolean isYourTurn;
-    private List<BoardPoint> mishitsPlayer;
-    private List<BoardPoint> hittedShipsPlayer;
+    private List<BoardPoint> mishitPoints;
+    private List<BoardPoint> hittedShipPoints;
+    private List<List<BoardPoint>> hittedShips;
 
-    public Player(int playerId, Board board, List<Ship> ships, boolean isYourTurn, List<BoardPoint> mishitsPlayer, List<BoardPoint> hittedShipsPlayer) {
+    public Player(int playerId, Board board, List<List<BoardPoint>> ships, boolean isYourTurn, List<BoardPoint> mishitPoints, List<BoardPoint> hittedShipPoints, List<List<BoardPoint>> hittedShips) {
         this.playerId = playerId;
         this.board = board;
         this.ships = ships;
         this.isYourTurn = isYourTurn;
-        this.mishitsPlayer = mishitsPlayer;
-        this.hittedShipsPlayer = hittedShipsPlayer;
+        this.mishitPoints = mishitPoints;
+        this.hittedShipPoints = hittedShipPoints;
+        this.hittedShips = hittedShips;
     }
 
     public int getPlayerId() {
@@ -27,7 +29,7 @@ public class Player {
         return board;
     }
 
-    public List<Ship> getShips() {
+    public List<List<BoardPoint>> getShips() {
         return ships;
     }
 
@@ -39,12 +41,19 @@ public class Player {
         isYourTurn = yourTurn;
     }
 
-    public List<BoardPoint> getMishitsPlayer() {
-        return mishitsPlayer;
+    public List<BoardPoint> getMishitPoints() {
+        return mishitPoints;
     }
 
-    public List<BoardPoint> getHittedShipsPlayer() {
-        return hittedShipsPlayer;
+    public List<BoardPoint> getHittedShipPoints() {
+        return hittedShipPoints;
     }
 
+    public List<List<BoardPoint>> getHittedShips() {
+        return hittedShips;
+    }
+
+    public void setHittedShips(List<List<BoardPoint>> hittedShips) {
+        this.hittedShips = hittedShips;
+    }
 }
