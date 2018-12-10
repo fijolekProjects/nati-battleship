@@ -1,10 +1,9 @@
 package battleship.game.battleship;
 
 import battleship.game.battleship.model.*;
+import battleship.game.battleship.utils.BoardGenerator;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.List;
 
 public class BoardGeneratorTest {
     Board boardGenerator = BoardGenerator.generateBoard(10, 10);
@@ -17,5 +16,7 @@ public class BoardGeneratorTest {
 
         System.out.println(boardGenerator.getBoard());
     }
+
+
 
 }

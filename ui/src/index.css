@@ -3,40 +3,40 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    position: fixed;
-    width: 100%;
-    height: 100%;
     overflow-y: auto;
 }
 
 div.myApp {
+    margin-top: 80px;
     border: solid whitesmoke;
     background-color: rgba(255, 255, 255, 0.53);
+    position: center;
 }
 
 div.player1, div.player2 {
-    /*display: inline-block;*/
-    margin: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
+
 
 div.hiddenPlayer2, div.hiddenPlayer1 {
     opacity: 0.5;
     cursor: not-allowed;
-    /*display: inline-block;*/
-    margin: 50px;
-}
-
-div.row {
-    margin-bottom: -6px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 div.column, div.columnShip, div.hittedShip, div.mishit {
     cursor: pointer;
-    width: 20px;
-    height: 20px;
-    padding: 10px;
-    border: solid grey 0.5px;
+    width: 25px;
+    height: 25px;
+    padding: 5px;
+    border: solid  #333333 0.1px;
     display: inline-block;
+}
+
+div.player2 div.column, div.columnShip, div.hittedShip, div.mishit {
+    pointer-events: none;
 }
 
 div.hiddenPlayer1 div.column, div.columnShip, div.hittedShip, div.mishit {
@@ -47,37 +47,41 @@ div.hiddenPlayer2 div.column, div.columnShip, div.hittedShip, div.mishit {
     pointer-events: none;
 }
 
+div.player2 div.column, div.columnShip, div.hittedShip, div.mishit {
+    pointer-events: none;
+}
+
 div.column {
-    /*background-color: rgba(231, 237, 240, 0.83);*/
+    color: whitesmoke;
 }
 
 div.hittedShip {
     cursor: not-allowed;
-    background-color: #F6521C;
+    background-color: #fcc7b6;
+
 }
 
 div.mishit {
     cursor: not-allowed;
-    background-color: lightgrey;
-
+    background-color: #E0E0E0;
 }
 
-div.hittedShips {
-    margin: 30px;
-}
 
 div.board {
-    margin: 20px;
+    margin: 10px 10px 50px;
     display: inline-block;
 }
 
 div.decker1, div.decker2, div.decker3, div.decker4,div.hiddenDecker1, div.hiddenDecker2, div.hiddenDecker3, div.hiddenDecker4 {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     padding: 10px;
     background-color: #F6521C;
-    margin: 5px;
+    margin: 30px 12px 12px;
     color: whitesmoke;
+    float: left;
+    position: center;
+    text-align: center;
 }
 
 div.hiddenDecker1 {
@@ -85,16 +89,16 @@ div.hiddenDecker1 {
 }
 
 div.decker2, div.hiddenDecker2 {
-    width: 40px;
-    height: 20px;
+    width: 50px;
+    height: 15px;
 }
 
 div.hiddenDecker2 {
     opacity: 0.6;
 }
 div.decker3, div.hiddenDecker3 {
-    width: 60px;
-    height: 20px;
+    width: 85px;
+    height: 15px;
 }
 
 div.hiddenDecker3 {
@@ -102,8 +106,8 @@ div.hiddenDecker3 {
 }
 
 div.decker4, div.hiddenDecker4 {
-    width: 80px;
-    height: 20px;
+    width: 115px;
+    height: 15px;
 }
 
 div.hiddenDecker4 {
@@ -112,4 +116,28 @@ div.hiddenDecker4 {
 
 div.drawShips {
     text-align: left;
+}
+
+@media only screen and (max-width: 900px) {
+
+    div.column, div.columnShip, div.hittedShip, div.mishit {
+        width: 20px;
+        height: 20px;
+        padding: 5px;
+    }
+
+    div.player1, div.player2 {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+
+    div.hiddenPlayer2, div.hiddenPlayer1 {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    div.decker1, div.decker2, div.decker3, div.decker4,div.hiddenDecker1, div.hiddenDecker2, div.hiddenDecker3, div.hiddenDecker4 {
+        margin: 15px 12px 12px;
+    }
 }
