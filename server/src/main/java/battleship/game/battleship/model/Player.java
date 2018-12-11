@@ -5,6 +5,8 @@ import java.util.List;
 public class Player {
     private int playerId;
     private Board board;
+//    ta lista list zeby reprezentowac liste statkow dziwnie wyglada, powinno byc bardziej cos w stylu
+//    List<Ship> - nie wiem czy to cos we frontendzie nie utrudni, ale dla frontendu zawsze mozna zwrocic jakiegos DTO
     private List<List<BoardPoint>> ships;
     private boolean isYourTurn;
     private List<BoardPoint> mishitPoints;

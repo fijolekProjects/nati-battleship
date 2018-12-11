@@ -75,6 +75,14 @@ class App extends Component {
   }
 
   setGameStatus = (data) => {
+    //tutaj mozesz po prostu zrobic
+    // this.setState({
+    //     player1Id: data[0].playerId,
+    //     boardPlayer1: data[0].board.board
+    //       ...itd...
+    // });
+    //
+    //tutaj widac ze walczysz z formatem danych z backendu tzn format z backendu nie pasuje do struktury danych jaka przyjelas we frontendzie
     this.setState({player1Id: data[0].playerId});
     this.setState({boardPlayer1: data[0].board.board});
     this.setState({hittedPointsPlayer1: data[0].hittedShipPoints});

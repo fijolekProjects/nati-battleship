@@ -6,11 +6,13 @@ import battleship.game.battleship.model.Player;
 import battleship.game.battleship.utils.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GameLogic {
 
+//    ta inicjalizacja powinna byc w konstroktorze, tak zeby tylko `players` bylo zmienna w tej klasie (a najlepiej obiekt Game)
     private List<BoardPoint> mishitsPlayer1 = new ArrayList<>();
     private List<BoardPoint> mishitsPlayer2 = new ArrayList<>();
     private List<BoardPoint> hittedShipPointsPlayer1 = new ArrayList<>();
@@ -41,6 +43,16 @@ public class GameLogic {
             player.setHittedShips(hittedShips);
             player.setYourTurn(true);
             enemy.setYourTurn(false);
+            //to mutowanie nie jest zbyt dobre, zauwaz ze pobierasz najpierw dane z playera (`player.getMishitPoints()`),
+            // pozniej do tych danych dodajesz cos (mishitsPlayer.addAll(SurroundedPointsLogic.diag...) i po tej linijce zmienia sie rowniez
+            // sam player i wywolanie `player.getMishitPoints()` zwroci co innego niz na poczatku!
+            // dla mnie to jest mega nielogiczne i staram sie tak nie pisac
+            //tutaj przydaloby sie zrobic najpierw kopie przynajmniej tej listy mishitsPlayer np. tak:
+//            ArrayList<BoardPoint> mishitsPlayerCopy = new ArrayList<>(mishitsPlayer);
+//            mishitsPlayerCopy.addAll(SurroundedPointsLogic.dia...
+//            player.setMishitPoints(mishitsPlayerCopy)
+            //powyzszy kod moze tez byc bardziej obiektowy, idealnie by bylo zeby klasa Player nie miala publicznych setterow i wszystkie wyliczenia dzialy sie w srodu klasy
+            //getterow tez nie musi byc, bo jak widzisz w przykladzie z lista moga byc niebezpieczne (w javie :P)
             mishitsPlayer.addAll(SurroundedPointsLogic.diagonalPointsThatBelongsToBoard(flatBoard, boardPoint));
             List<List<BoardPoint>> hittedShip = BoardsOperations.whetherTheListOfListsContainsBoardPoint(hittedShips, boardPoint);
             if (hittedShip.size() != 0) {
