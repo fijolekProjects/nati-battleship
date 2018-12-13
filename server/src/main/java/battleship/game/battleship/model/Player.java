@@ -21,6 +21,10 @@ public class Player {
         this.hittedShips = hittedShips;
     }
 
+    public boolean isGameOver() {
+        return this.hittedShips.size() == this.ships.size();
+    }
+
     public int getPlayerId() {
         return playerId;
     }
@@ -55,5 +59,9 @@ public class Player {
 
     public void setHittedShips(List<List<BoardPoint>> hittedShips) {
         this.hittedShips = hittedShips;
+    }
+
+    public void setMishitPoints(List<BoardPoint> mishitPoints) {
+        this.mishitPoints = mishitPoints;
     }
 }

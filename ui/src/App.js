@@ -31,27 +31,31 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getGameStatus();
+    this.newGame();
   };
 
+  newGame = () => {
+    HttpService.fetchJson('newGame')
+      .then(data => {
+        console.log(data)
+        this.setGameStatus(data);
+      })
+  }
+
   getGameStatus = (body) => {
-    if (typeof body === "undefined") {
-      body = null;
-    }
     this.play(body);
   };
 
   play = (body) => {
     HttpService.postJson('player', body)
       .then(data => {
-        this.setState({statusGame: data.status})
         return data.json();
       }).then(data => {
       this.setGameStatus(data);
-      if (this.state.statusGame === 400) {
+      if (this.state.statusGame === false) {
         this.whoWon(this.state.turnPlayer1)
       }
-      if (this.state.turnPlayer1 === false && this.state.statusGame === 200) {
+      if (this.state.turnPlayer1 === false) {
         setTimeout(this.computer, 1000);
       }
     })
@@ -60,33 +64,34 @@ class App extends Component {
   computer = () => {
     HttpService.postJson('computer')
       .then(data => {
-        this.setState({statusGame: data.status})
         return data.json();
       }).then(data => {
       this.setGameStatus(data);
-      console.log("data", data)
-      if (this.state.statusGame === 400) {
+      if (this.state.statusGame === false) {
         this.whoWon(this.state.turnPlayer1)
       }
-      if (this.state.turnPlayer1 === false && this.state.statusGame === 200) {
+      if (this.state.turnPlayer1 === false) {
         setTimeout(this.computer, 1000);
       }
     })
   }
 
   setGameStatus = (data) => {
-    this.setState({player1Id: data[0].playerId});
-    this.setState({boardPlayer1: data[0].board.board});
-    this.setState({hittedPointsPlayer1: data[0].hittedShipPoints});
-    this.setState({mishitsPlayer1: data[0].mishitPoints});
-    this.setState({turnPlayer1: data[0].yourTurn});
-    this.setState({hittedShipsPlayer1: data[0].hittedShips});
-    this.setState({player2Id: data[1].playerId});
-    this.setState({boardPlayer2: data[1].board.board});
-    this.setState({hittedPointsPlayer2: data[1].hittedShipPoints});
-    this.setState({mishitsPlayer2: data[1].mishitPoints});
-    this.setState({turnPlayer2: data[1].yourTurn});
-    this.setState({hittedShipsPlayer2: data[1].hittedShips});
+    this.setState({
+      statusGame: data.gameRunning,
+      player1Id: data.player.playerId,
+      boardPlayer1: data.player.board.board,
+      hittedPointsPlayer1: data.player.hittedShipPoints,
+      mishitsPlayer1: data.player.mishitPoints,
+      turnPlayer1: data.player.yourTurn,
+      hittedShipsPlayer1: data.player.hittedShips,
+      player2Id: data.computer.playerId,
+      boardPlayer2: data.computer.board.board,
+      hittedPointsPlayer2: data.computer.hittedShipPoints,
+      mishitsPlayer2: data.computer.mishitPoints,
+      turnPlayer2: data.computer.yourTurn,
+      hittedShipsPlayer2: data.computer.hittedShips,
+    });
   };
 
   drawHittedPoints = (rowId, columnId, hittedPoints) => {
@@ -137,10 +142,11 @@ class App extends Component {
   };
 
   whoWon = (playerStatus) => {
-    if (playerStatus) {
-      return alert("KONEIC GRY! WYGRAŁ GRACZ: " + this.state.player1Id)
-    } else {
-      return alert("KONEIC GRY! WYGRAŁ GRACZ: " + this.state.player2Id)
+    //eslint-disable-next-line
+    const info = playerStatus ? confirm("KONIEC GRY! WYGRAŁ GRACZ: " + this.state.player1Id) : confirm("KONIEC GRY! WYGRAŁ GRACZ: " + this.state.player2Id)
+    if (info === true) {
+      this.setState({statusGame: true})
+      this.newGame();
     }
   }
 

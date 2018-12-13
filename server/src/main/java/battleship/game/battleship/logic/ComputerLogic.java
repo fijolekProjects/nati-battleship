@@ -11,14 +11,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ComputerLogic {
-    private GameLogic gameLogic;
 
-    public ComputerLogic(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
+    public ComputerLogic() {
     }
 
-    public BoardPoint hitBoardPoint(int playerId) {
-        Player player = gameLogic.getPlayer(playerId);
+    public BoardPoint hitBoardPoint(Player player) {
         List<BoardPoint> hittedShipPoints = player.getHittedShipPoints();
         List<BoardPoint> flatBoard = ListOperation.flatLists(player.getBoard().getBoard());
         List<BoardPoint> hittedShipsFlat = ListOperation.flatLists(player.getHittedShips());
