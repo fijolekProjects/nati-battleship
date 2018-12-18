@@ -37,7 +37,6 @@ class App extends Component {
   newGame = () => {
     HttpService.fetchJson('newGame')
       .then(data => {
-        console.log(data)
         this.setGameStatus(data);
       })
   }
@@ -124,7 +123,7 @@ class App extends Component {
   };
 
   generateHittedShips = (hittedShips, k) => {
-    const hittedShipsGrouped = _.groupBy(hittedShips, (i => i.length));
+    const hittedShipsGrouped = _.groupBy(hittedShips, (i => i.ship.length));
     return hittedShipsGrouped[k] ? hittedShipsGrouped[k].length : 0;
   };
 

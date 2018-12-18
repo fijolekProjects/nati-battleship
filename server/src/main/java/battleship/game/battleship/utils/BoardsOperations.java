@@ -1,14 +1,15 @@
 package battleship.game.battleship.utils;
 
 import battleship.game.battleship.model.BoardPoint;
+import battleship.game.battleship.model.Ship;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BoardsOperations {
 
-    public static List<List<BoardPoint>> whetherTheListOfListsContainsBoardPoint(List<List<BoardPoint>> listOfLists, BoardPoint boardPoint) {
-        return listOfLists.stream().filter(list -> BoardsOperations.whetherTheListContainsBoardPoint(list, boardPoint)).collect(Collectors.toList());
+    public static List<Ship> whetherTheListOfListsContainsBoardPoint(List<Ship> listOfLists, BoardPoint boardPoint) {
+        return listOfLists.stream().filter(list -> BoardsOperations.whetherTheListContainsBoardPoint(list.getShip(), boardPoint)).collect(Collectors.toList());
     }
 
     public static List<BoardPoint> whetherPointsBelongToBoard(List<BoardPoint> boardPoints, List<BoardPoint> points) {
@@ -19,7 +20,7 @@ public class BoardsOperations {
         return list.contains(boardPoint);
     }
 
-    public static List<List<BoardPoint>> whetherListOfListsContainsAllPoints(List<List<BoardPoint>> listOfLists, List<BoardPoint> boardPoints) {
-        return listOfLists.stream().filter(boardPoints::containsAll).collect(Collectors.toList());
+    public static List<Ship> whetherListOfListsContainsAllPoints(List<Ship> listOfLists, List<BoardPoint> boardPoints) {
+        return listOfLists.stream().filter(ship -> boardPoints.containsAll(ship.getShip())).collect(Collectors.toList());
     }
 }

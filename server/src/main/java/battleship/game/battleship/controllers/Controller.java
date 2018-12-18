@@ -1,5 +1,7 @@
 package battleship.game.battleship.controllers;
 
+import battleship.game.battleship.dto.GameDTO;
+import battleship.game.battleship.dto.PlayerDTO;
 import battleship.game.battleship.logic.ComputerLogic;
 import battleship.game.battleship.logic.GameLogic;
 import battleship.game.battleship.model.BoardPoint;
@@ -18,24 +20,39 @@ public class Controller {
     private ComputerLogic computerLogic = null;
     private Player player = null;
     private Player computer = null;
+    private PlayerDTO playerDTO = null;
+    private PlayerDTO computerDTO = null;
 
     @RequestMapping(value = "newGame", method = RequestMethod.GET)
-    public ResponseEntity<Game> newGame() {
+    public ResponseEntity<GameDTO> newGame() {
         gameLogic = new GameLogic();
         computerLogic = new ComputerLogic();
         Game game = gameLogic.getGame();
         player = game.getPlayer();
         computer = game.getComputer();
-        return new ResponseEntity<>(game, HttpStatus.OK);
+        playerDTO = new PlayerDTO(player);
+        computerDTO = new PlayerDTO(computer);
+        GameDTO gameDTO = new GameDTO(playerDTO, computerDTO, game.isGameRunning());
+        return new ResponseEntity<>(gameDTO, HttpStatus.OK);
     }
 
     @RequestMapping(value = "player", method = RequestMethod.POST)
-    public ResponseEntity<Game> player(@RequestBody(required = false) BoardPoint hittedBoardPoint) {
-        return new ResponseEntity<>(gameLogic.playGame(player, computer, hittedBoardPoint), HttpStatus.OK);
+    public ResponseEntity<GameDTO> player(@RequestBody(required = false) BoardPoint hittedBoardPoint) {
+        Game game = gameLogic.playGame(player, computer, hittedBoardPoint);
+        playerDTO = new PlayerDTO(game.getPlayer());
+        computerDTO = new PlayerDTO(game.getComputer());
+        GameDTO gameDTO = new GameDTO(playerDTO, computerDTO, game.isGameRunning());
+        return new ResponseEntity<>(gameDTO, HttpStatus.OK);
     }
 
     @RequestMapping(value = "computer", method = RequestMethod.POST)
-    public ResponseEntity<Game> computer() {
-        return new ResponseEntity<>(gameLogic.playGame(computer, player, computerLogic.hitBoardPoint(computer)), HttpStatus.OK);
+    public ResponseEntity<GameDTO> computer() {
+        BoardPoint boardPoint = computerLogic.hitBoardPoint(computer);
+        Game game = gameLogic.playGame(computer, player, boardPoint);
+        computerDTO = new PlayerDTO(game.getPlayer());
+        playerDTO = new PlayerDTO(game.getComputer());
+        GameDTO gameDTO = new GameDTO(computerDTO, playerDTO, game.isGameRunning());
+        return new ResponseEntity<>(gameDTO, HttpStatus.OK);
     }
+
 }

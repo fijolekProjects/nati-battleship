@@ -18,7 +18,7 @@ public class ComputerLogic {
     public BoardPoint hitBoardPoint(Player player) {
         List<BoardPoint> hittedShipPoints = player.getHittedShipPoints();
         List<BoardPoint> flatBoard = ListOperation.flatLists(player.getBoard().getBoard());
-        List<BoardPoint> hittedShipsFlat = ListOperation.flatLists(player.getHittedShips());
+        List<BoardPoint> hittedShipsFlat = ListOperation.flatShips(player.getHittedShips());
         List<BoardPoint> hittedPoints = hittedPointButNotSunk(hittedShipPoints, hittedShipsFlat);
         List<BoardPoint> filteredBoard = RandomPointsGenerator.pointsAlreadyHitted(flatBoard, hittedShipPoints, player.getMishitPoints());
         if (!(hittedPoints.isEmpty() || filteredBoard.isEmpty())) {

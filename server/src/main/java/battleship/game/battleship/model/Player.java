@@ -5,13 +5,13 @@ import java.util.List;
 public class Player {
     private int playerId;
     private Board board;
-    private List<List<BoardPoint>> ships;
+    private List<Ship> ships;
     private boolean isYourTurn;
     private List<BoardPoint> mishitPoints;
     private List<BoardPoint> hittedShipPoints;
-    private List<List<BoardPoint>> hittedShips;
+    private List<Ship> hittedShips;
 
-    public Player(int playerId, Board board, List<List<BoardPoint>> ships, boolean isYourTurn, List<BoardPoint> mishitPoints, List<BoardPoint> hittedShipPoints, List<List<BoardPoint>> hittedShips) {
+    public Player(int playerId, Board board, List<Ship> ships, boolean isYourTurn, List<BoardPoint> mishitPoints, List<BoardPoint> hittedShipPoints, List<Ship> hittedShips) {
         this.playerId = playerId;
         this.board = board;
         this.ships = ships;
@@ -33,7 +33,7 @@ public class Player {
         return board;
     }
 
-    public List<List<BoardPoint>> getShips() {
+    public List<Ship> getShips() {
         return ships;
     }
 
@@ -53,12 +53,16 @@ public class Player {
         return hittedShipPoints;
     }
 
-    public List<List<BoardPoint>> getHittedShips() {
-        return hittedShips;
+    public void setHittedShips(List<Ship> hittedShips) {
+        this.hittedShips = hittedShips;
     }
 
-    public void setHittedShips(List<List<BoardPoint>> hittedShips) {
-        this.hittedShips = hittedShips;
+    public void setShips(List<Ship> ships) {
+        this.ships = ships;
+    }
+
+    public List<Ship> getHittedShips() {
+        return hittedShips;
     }
 
     public void setMishitPoints(List<BoardPoint> mishitPoints) {
