@@ -50,6 +50,7 @@ class App extends Component {
       .then(data => {
         return data.json();
       }).then(data => {
+        console.log("player", data)
       this.setGameStatus(data);
       if (this.state.statusGame === false) {
         this.whoWon(this.state.turnPlayer1)

@@ -1,5 +1,6 @@
 package battleship.game.battleship.utils;
 
+import battleship.game.battleship.model.Board;
 import battleship.game.battleship.model.BoardPoint;
 import battleship.game.battleship.model.Ship;
 
@@ -12,27 +13,27 @@ import java.util.stream.IntStream;
 public class ShipsGenerator {
     private List<Ship> ships = new ArrayList<Ship>();
     private List<BoardPoint> surroundedPoints = new ArrayList<>();
-    private List<BoardPoint> board = ListOperation.flatLists(BoardGenerator.generateBoard(10, 10).getBoard());
+    private Board board = new Board();
 
     public ShipsGenerator() {
         this.generateRandomShip();
     }
 
     private void generateRandomShip() {
-        generateRandomShip(4, getRandomBoolean());
-        generateRandomShip(3, getRandomBoolean());
-        generateRandomShip(3, getRandomBoolean());
-        generateRandomShip(2, getRandomBoolean());
-        generateRandomShip(2, getRandomBoolean());
-        generateRandomShip(2, getRandomBoolean());
-        generateRandomShip(1, getRandomBoolean());
-        generateRandomShip(1, getRandomBoolean());
-        generateRandomShip(1, getRandomBoolean());
-        generateRandomShip(1, getRandomBoolean());
+        generateRandomShip(4);
+        generateRandomShip(3);
+        generateRandomShip(3);
+        generateRandomShip(2);
+        generateRandomShip(2);
+        generateRandomShip(2);
+        generateRandomShip(1);
+        generateRandomShip(1);
+        generateRandomShip(1);
+        generateRandomShip(1);
     }
 
-    private void generateRandomShip(int shipSize, boolean isVertical) {
-        //LOGIC
+    private void generateRandomShip(int shipSize) {
+        boolean isVertical = getRandomBoolean();
         Ship ship;
         do {
             BoardPoint randomPoint = getBoardPoint();
@@ -40,27 +41,27 @@ public class ShipsGenerator {
             int columnId = randomPoint.getColumnId();
             ship = generateShip(rowId, columnId, shipSize, isVertical);
         } while (!properGeneratedShip(ship.getShip(), surroundedPoints));
-        List<BoardPoint> shipPoints = BoardsOperations.whetherPointsBelongToBoard(board, ship.getShip());
+        List<BoardPoint> shipPoints = board.whetherPointsBelongToBoard(ship.getShip());
         ships.add(new Ship(shipPoints));
 
         List<BoardPoint> surroundedPointsCross = ListOperation.flatLists(ship.getShip().stream().map(boardPoint ->
-                SurroundedPointsLogic.getDiagonallySurroundedPoints(boardPoint.getRowId(), boardPoint.getColumnId())).collect(Collectors.toList()));
+                SurroundedPointsLogic.getDiagonallySurroundedPoints(board, boardPoint)).collect(Collectors.toList()));
         List<BoardPoint> diagonallySurroundedPoints = SurroundedPointsLogic.getSurroundedPointsIfHittedShip(board, ship.getShip());
 
-        surroundedPoints.addAll(BoardsOperations.whetherPointsBelongToBoard(board, surroundedPointsCross));
+        surroundedPoints.addAll(board.whetherPointsBelongToBoard(surroundedPointsCross));
         surroundedPoints.addAll(diagonallySurroundedPoints);
     }
 
     private boolean properGeneratedShip(List<BoardPoint> ship, List<BoardPoint> points) {
-        return ship.stream().allMatch(boardPoint -> BoardsOperations.whetherTheListContainsBoardPoint(board, boardPoint) && !points.contains(boardPoint));
+        return ship.stream().allMatch(boardPoint -> board.flatBoard().contains(boardPoint) && !points.contains(boardPoint));
     }
 
     private BoardPoint getBoardPoint() {
         if (ships.isEmpty()) {
-            return RandomPointsGenerator.randomPoint(board);
+            return RandomPointsGenerator.randomPoint(board.flatBoard());
         } else {
             List<BoardPoint> flatShips = ListOperation.flatShips(ships);
-            List<BoardPoint> filteredBoardPoints = RandomPointsGenerator.pointsAlreadyHitted(board, flatShips, surroundedPoints);
+            List<BoardPoint> filteredBoardPoints = RandomPointsGenerator.pointsAlreadyHitted(board.flatBoard(), flatShips, surroundedPoints);
             return RandomPointsGenerator.randomPoint(filteredBoardPoints);
         }
     }

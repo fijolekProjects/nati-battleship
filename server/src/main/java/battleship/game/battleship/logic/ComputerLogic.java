@@ -17,12 +17,12 @@ public class ComputerLogic {
 
     public BoardPoint hitBoardPoint(Player player) {
         List<BoardPoint> hittedShipPoints = player.getHittedShipPoints();
-        List<BoardPoint> flatBoard = ListOperation.flatLists(player.getBoard().getBoard());
-        List<BoardPoint> hittedShipsFlat = ListOperation.flatShips(player.getHittedShips());
+        List<BoardPoint> flatBoard = player.getBoard().flatBoard();
+        List<BoardPoint> hittedShipsFlat = player.flatShips(player.getHittedShips());
         List<BoardPoint> hittedPoints = hittedPointButNotSunk(hittedShipPoints, hittedShipsFlat);
         List<BoardPoint> filteredBoard = RandomPointsGenerator.pointsAlreadyHitted(flatBoard, hittedShipPoints, player.getMishitPoints());
         if (!(hittedPoints.isEmpty() || filteredBoard.isEmpty())) {
-            List<List<BoardPoint>> boardPoints = hittedPoints.stream().map(point -> SurroundedPointsLogic.getCrossSurroundedPoints(point.getRowId(), point.getColumnId())).collect(Collectors.toList());
+            List<List<BoardPoint>> boardPoints = hittedPoints.stream().map(SurroundedPointsLogic::getCrossSurroundedPoints).collect(Collectors.toList());
             Optional<BoardPoint> boardPoint = ListOperation.flatLists(boardPoints).stream().filter(filteredBoard::contains).findFirst();
             return boardPoint.orElseGet(() -> RandomPointsGenerator.randomPoint(filteredBoard));
         } else {

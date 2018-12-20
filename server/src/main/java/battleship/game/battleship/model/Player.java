@@ -1,6 +1,10 @@
 package battleship.game.battleship.model;
 
+import battleship.game.battleship.utils.SurroundedPointsLogic;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Player {
     private int playerId;
@@ -21,6 +25,40 @@ public class Player {
         this.hittedShips = hittedShips;
     }
 
+    public void updatePlayerState(BoardPoint boardPoint, Player enemy) {
+        ArrayList<BoardPoint> mishitsPlayerCopy = new ArrayList<>(mishitPoints);
+        if (flatShips(ships).contains(boardPoint)) {
+            hittedShipPoints.add(boardPoint);
+            filterShipsFromHittedPoints();
+            isYourTurn = true;
+            enemy.isYourTurn = false;
+            mishitsPlayerCopy.addAll(SurroundedPointsLogic.getDiagonallySurroundedPoints(board, boardPoint));
+            List<Ship> hittedShip = whetherTheListOfListsContainsBoardPoint(boardPoint);
+            if (hittedShip.size() != 0) {
+                mishitsPlayerCopy.addAll(SurroundedPointsLogic.getSurroundedPointsIfHittedShip(board, hittedShip.get(0).getShip()));
+            }
+            mishitPoints = mishitsPlayerCopy;
+        } else {
+            mishitPoints.add(boardPoint);
+            isYourTurn = false;
+            enemy.isYourTurn = true;
+        }
+    }
+
+    private List<Ship> whetherTheListOfListsContainsBoardPoint(BoardPoint boardPoint) {
+        return hittedShips.stream().filter(list -> list.getShip().contains(boardPoint)).collect(Collectors.toList());
+    }
+
+    private void filterShipsFromHittedPoints() {
+        hittedShips = ships.stream().filter(ship -> hittedShipPoints.containsAll(ship.getShip())).collect(Collectors.toList());
+    }
+
+    public List<BoardPoint> flatShips(List<Ship> ships) {
+        return ships.stream()
+                .flatMap(ship -> ship.getShip().stream())
+                .collect(Collectors.toList());
+    }
+
     public boolean isGameOver() {
         return this.hittedShips.size() == this.ships.size();
     }
@@ -33,16 +71,8 @@ public class Player {
         return board;
     }
 
-    public List<Ship> getShips() {
-        return ships;
-    }
-
     public boolean isYourTurn() {
         return isYourTurn;
-    }
-
-    public void setYourTurn(boolean yourTurn) {
-        isYourTurn = yourTurn;
     }
 
     public List<BoardPoint> getMishitPoints() {
@@ -53,19 +83,7 @@ public class Player {
         return hittedShipPoints;
     }
 
-    public void setHittedShips(List<Ship> hittedShips) {
-        this.hittedShips = hittedShips;
-    }
-
-    public void setShips(List<Ship> ships) {
-        this.ships = ships;
-    }
-
     public List<Ship> getHittedShips() {
         return hittedShips;
-    }
-
-    public void setMishitPoints(List<BoardPoint> mishitPoints) {
-        this.mishitPoints = mishitPoints;
     }
 }

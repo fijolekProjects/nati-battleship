@@ -12,4 +12,5 @@ public class Ship {
     public List<BoardPoint> getShip() {
         return ship;
     }
+
 }

@@ -2,16 +2,35 @@ package battleship.game.battleship.model;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Board {
     private List<List<BoardPoint>> board;
 
-    public Board(List<List<BoardPoint>> board) {
-        this.board = board;
+    public Board() {
+
+        this.board = generateBoard();
     }
 
     public List<List<BoardPoint>> getBoard() {
         return board;
+    }
+
+    public List<BoardPoint> whetherPointsBelongToBoard(List<BoardPoint> points) {
+        return points.stream().filter(point -> flatBoard().contains(point)).collect(Collectors.toList());
+    }
+
+    public List<BoardPoint> flatBoard() {
+        return board.stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+    }
+
+    private List<List<BoardPoint>> generateBoard() {
+        return IntStream.range(0, 10).mapToObj(column -> {
+            return IntStream.range(0, 10).mapToObj(row -> new BoardPoint(column, row)).collect(Collectors.toList());
+        }).collect(Collectors.toList());
     }
 
     @Override
