@@ -24,6 +24,8 @@ public class GameLogic {
         game = new Game(playerOne, playerTwo, true);
     }
 
+    //ta metode `playGame` przenioslbym do Game a nastepnie kalse GameLogic przenazwilbym na GameFactory i zrobil tak,
+    //zeby dalo sie zrobic cos takiego - Game game = GameFactory.newGame()
     public Game playGame(Player player, Player enemy, BoardPoint boardPoint) {
         if (player.isGameOver()) {
             game.setGameRunning(false);

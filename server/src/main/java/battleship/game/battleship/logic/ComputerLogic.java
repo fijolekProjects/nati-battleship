@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+//Ta klasa chyba pasuje do tego, zeby podzielic jakos Player'a na ComputerPlayer i UserPlayer,
+// dlatego ze hitBoardPoint bierze player'a i na tej podstawie wszystko sie dzieje
 public class ComputerLogic {
 
     public ComputerLogic() {

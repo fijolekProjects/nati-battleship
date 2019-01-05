@@ -14,6 +14,8 @@ public class ListOperation {
                 .collect(Collectors.toList());
     }
 
+    //ta metoda nie pasuje do tej klasy, dlatego ze uzywa Ship i BoardPoint, wiec jest specyfincza dla Twojej aplikacji
+    //natomiast `flatLists` jest generyczna i moze byc przeniesiona do innego projektu
     public static List<BoardPoint> flatShips(List<Ship> lists) {
         return lists.stream()
                 .flatMap(ship -> ship.getShip().stream())

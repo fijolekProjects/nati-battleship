@@ -5,11 +5,12 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+//Nie rozumiem, dlaczego uzywamy tej klasy w shipGeneratorze - nie powinno tak byc
+//Poza tym to generateBoard() przenioslbym tzn. Board board = BoardFactory.createBoard(10, 10);
 public class Board {
     private List<List<BoardPoint>> board;
 
     public Board() {
-
         this.board = generateBoard();
     }
 

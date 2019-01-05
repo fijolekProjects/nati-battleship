@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class Controller {
+    //tutaj jest za duzo tego stanu
+    //normalnie w kontrolerze nie mielibysmy zadnego stanu, tutaj robimy wyjatek ze wzgledu na to, ze chcemy przechowywac stan gry
+    //staralbym sie tutaj jako stan, miec tylko jeden obiekt np Game, przez ktory zachodzilyby wszystkie zmiany stane - to bylby taki root do zarzadzania cala gra
+
     private GameLogic gameLogic = null;
     private ComputerLogic computerLogic = null;
     private Player player = null;

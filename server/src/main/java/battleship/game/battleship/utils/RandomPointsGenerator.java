@@ -12,6 +12,7 @@ public class RandomPointsGenerator {
         return filteredBoard.get(randomBoardPoint);
     }
 
+    //ta metoda tutaj nie pasuje, bo nie ma nic wspolnego z Random
     public static List<BoardPoint> pointsAlreadyHitted(List<BoardPoint> board, List<BoardPoint> hittedShipPoints, List<BoardPoint> mishitPoints) {
         return board.stream().filter(boardPoint ->
                 !(hittedShipPoints.contains(boardPoint) || mishitPoints.contains(boardPoint)))
